@@ -11,7 +11,7 @@
  */
 
 // Shuffle function from http://stackoverflow.com/a/2450976
-function shuffle(array) {
+/*function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
@@ -23,7 +23,17 @@ function shuffle(array) {
     }
 
     return array;
+}*/
+
+const cards = document.querySelectorAll(".card");
+function flip(evt){
+  evt.target.classList.add("show","open");
 }
+for(var i =0 ; i<cards.length ; i++)
+{
+  cards[i].addEventListener('click',flip);
+}
+
 
 
 /*

@@ -29,12 +29,18 @@ const cards = document.querySelectorAll(".card");
 function flip(evt){
   evt.target.classList.add("show","open");
 }
+
+const listOpen = [];
+function insertOpen(evt){
+listOpen.push(evt.target);
+}
+
 for(var i =0 ; i<cards.length ; i++)
 {
   cards[i].addEventListener('click',flip);
+  cards[i].addEventListener('click',insertOpen);
 }
-
-
+// If Matching
 
 /*
  * set up the event listener for a card. If a card is clicked:

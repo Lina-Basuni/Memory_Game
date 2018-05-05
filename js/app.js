@@ -4,6 +4,12 @@ let cards = document.querySelectorAll(".card");
 let cards_arr =[...cards];
 let moves=0;
 let n_moves=document.querySelector(".moves");
+const third_star=document.querySelector(".third_star");
+const scnd_star=document.querySelector(".scnd_star");
+const fst_star=document.querySelector(".fst_star");
+var secs = 0, mins = 0, hrs = 0;
+var timer = document.querySelector(".timer");
+var interval;
 /* Suffle Function*/
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -30,6 +36,9 @@ function startGame(){
         cards[i].classList.remove("show", "open", "match", "disabled");
         moves=0;
         n_moves.innerHTML=0;
+        timer.innerHTML = "0:0";
+        clearInterval(interval);
+
     }
   }
   /////////////////////////////////////////////////////
@@ -40,7 +49,20 @@ document.body.onload = startGame();
 function moves_inc(){
   moves++;
   n_moves.innerHTML=moves;
+  stars();
 
+}
+/*stars function*/
+function stars(){
+  if(moves>=10){
+    third_star.style.color="#565656";
+  }
+  if(moves>=25){
+    scnd_star.style.color="#565656";
+  }
+  if(moves>=35){
+    fst_star.style.color="#565656";
+  }
 }
 // event listeners for clicking on cards
 for(var i =0 ; i<cards.length ; i++)
@@ -95,6 +117,29 @@ function unmatching(){
     setTimeout(hideCard,500);
 }
 //////////////////////////////////
+
+
+/*timer */
+
+function startTimer(){
+    interval = setInterval(function(){
+        timer.innerHTML = mins+":"+secs;
+        secs++;
+        if(secs == 60){
+            mins++;
+            secs=0;
+        }
+        if(mins == 60){
+            hrs++;
+            mins = 0;
+        }
+    },1000);
+}
+deck.addEventListener('click',startTimer);
+
+
+
+
 
 /*
  * set up the event listener for a card. If a card is clicked:

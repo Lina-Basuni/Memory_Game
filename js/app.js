@@ -26,20 +26,53 @@
 }*/
 
 const cards = document.querySelectorAll(".card");
+const cards_arr =[...cards];
+for(var i =0 ; i<cards.length ; i++)
+{
+  cards_arr[i].addEventListener('click',flip);
+  cards_arr[i].addEventListener('click',insertOpen);
+}
+
+//flip function
 function flip(evt){
   evt.target.classList.add("show","open");
 }
-
+//insertOpen function
 const listOpen = [];
 function insertOpen(evt){
-listOpen.push(evt.target);
+  listOpen.push(evt.target);
+  const lengthOfList=listOpen.length;
+  if(lengthOfList===2){
+    if(listOpen[0].title===listOpen[1].title){
+      matching();
+      listOpen.length = 0;
+    }
+    else{
+      unmatching();
+
+    }
+  }
+}
+//Matching function
+function matching()
+{
+  listOpen[0].classList.add("match");
+  listOpen[1].classList.add("match");
 }
 
-for(var i =0 ; i<cards.length ; i++)
-{
-  cards[i].addEventListener('click',flip);
-  cards[i].addEventListener('click',insertOpen);
+function hideCard(){
+    listOpen[0].classList.remove("show","open","unmatched");
+    listOpen[1].classList.remove("show","open","unmatched");
+    listOpen.length = 0;
 }
+
+function unmatching(){
+    listOpen[0].classList.add("unmatched");
+    listOpen[1].classList.add("unmatched");
+
+    setTimeout(hideCard,500);
+}
+
 // If Matching
 
 /*

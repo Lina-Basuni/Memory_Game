@@ -1,18 +1,8 @@
-/*
- * Create a list that holds all of your cards
- */
-
-
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
-
+/*****Memory Game***/
 const deck = document.querySelector(".deck");
 let cards = document.querySelectorAll(".card");
 let cards_arr =[...cards];
+/* Suffle Function*/
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -27,8 +17,8 @@ function shuffle(array) {
     return array;
 }
 
+/* Function that starts on loading the Game*/
 function startGame(){
-
     cards_arr = shuffle(cards_arr);
     for (let i = 0; i < cards_arr.length; i++){
         deck.innerHTML = "";
@@ -36,12 +26,12 @@ function startGame(){
             deck.appendChild(item);
         });
         cards[i].classList.remove("show", "open", "match", "disabled");
-    }}
+    }
+  }
+  /////////////////////////////////////////////////////
+
 document.querySelector(".restart").addEventListener('click',startGame);
 document.body.onload = startGame();
-
-
-
 
 // event listeners for clicking on cards
 for(var i =0 ; i<cards.length ; i++)
@@ -54,7 +44,8 @@ for(var i =0 ; i<cards.length ; i++)
 function flip(evt){
   evt.target.classList.add("show","open","disabled");
 }
-//insertOpen function
+
+//insertOpen function that inserts a clicked card to an array of length 2
 const listOpen = [];
 function insertOpen(evt){
   listOpen.push(evt.target);
@@ -70,6 +61,7 @@ function insertOpen(evt){
     }
   }
 }
+
 //Matching function
 function matching()
 {
@@ -77,20 +69,22 @@ function matching()
   listOpen[1].classList.add("match");
 }
 
+/*hideCard function that flips the cards closed again after being unmatched*/
+
 function hideCard(){
     listOpen[0].classList.remove("show","open","unmatched","disabled");
     listOpen[1].classList.remove("show","open","unmatched","disabled");
     listOpen.length = 0;
 }
+/////////////////////////////////////
 
+/*Unmatching Function*/
 function unmatching(){
     listOpen[0].classList.add("unmatched");
     listOpen[1].classList.add("unmatched");
-
     setTimeout(hideCard,500);
 }
-
-// If Matching
+//////////////////////////////////
 
 /*
  * set up the event listener for a card. If a card is clicked:

@@ -2,6 +2,8 @@
 const deck = document.querySelector(".deck");
 let cards = document.querySelectorAll(".card");
 let cards_arr =[...cards];
+let moves=0;
+let n_moves=document.querySelector(".moves");
 /* Suffle Function*/
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -26,18 +28,26 @@ function startGame(){
             deck.appendChild(item);
         });
         cards[i].classList.remove("show", "open", "match", "disabled");
+        moves=0;
+        n_moves.innerHTML=0;
     }
   }
   /////////////////////////////////////////////////////
 
 document.querySelector(".restart").addEventListener('click',startGame);
 document.body.onload = startGame();
+/*moves increment function*/
+function moves_inc(){
+  moves++;
+  n_moves.innerHTML=moves;
 
+}
 // event listeners for clicking on cards
 for(var i =0 ; i<cards.length ; i++)
 {
   cards_arr[i].addEventListener('click',flip);
   cards_arr[i].addEventListener('click',insertOpen);
+  cards_arr[i].addEventListener('click',moves_inc);
 }
 
 //flip function

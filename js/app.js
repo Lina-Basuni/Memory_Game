@@ -4,12 +4,14 @@ let cards = document.querySelectorAll(".card");
 let cards_arr =[...cards];
 let moves=0;
 let n_moves=document.querySelector(".moves");
+let matched_cards= document.getElementsByClassName("match");
 const third_star=document.querySelector(".third_star");
 const scnd_star=document.querySelector(".scnd_star");
 const fst_star=document.querySelector(".fst_star");
-var secs = 0, mins = 0, hrs = 0;
 var timer = document.querySelector(".timer");
+var secs = 0, mins = 0, hrs = 0;
 var interval;
+var finalTime;
 /* Suffle Function*/
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -25,6 +27,32 @@ function shuffle(array) {
     return array;
 }
 
+/*timer */
+
+function startTimer(){
+    interval = setInterval(function(){
+        timer.innerHTML = mins+":"+secs;
+        secs++;
+        if(secs == 60){
+            mins++;
+            secs=0;
+        }
+        if(mins == 60){
+            hrs++;
+            mins = 0;
+        }
+    },1000);
+}
+deck.addEventListener('click',startTimer);
+
+/***reset timer***/////
+
+function reset_timer(){
+  var timer = document.querySelector(".timer");
+  timer.innerHTML = "0:0";
+  clearInterval(interval);
+}
+
 /* Function that starts on loading the Game*/
 function startGame(){
     cards_arr = shuffle(cards_arr);
@@ -36,14 +64,13 @@ function startGame(){
         cards[i].classList.remove("show", "open", "match", "disabled");
         moves=0;
         n_moves.innerHTML=0;
-        timer.innerHTML = "0:0";
-        clearInterval(interval);
 
     }
   }
   /////////////////////////////////////////////////////
 
 document.querySelector(".restart").addEventListener('click',startGame);
+document.querySelector(".restart").addEventListener('click',reset_timer);
 document.body.onload = startGame();
 /*moves increment function*/
 function moves_inc(){
@@ -70,6 +97,7 @@ for(var i =0 ; i<cards.length ; i++)
   cards_arr[i].addEventListener('click',flip);
   cards_arr[i].addEventListener('click',insertOpen);
   cards_arr[i].addEventListener('click',moves_inc);
+  cards_arr[i].addEventListener('click',congratulations);
 }
 
 //flip function
@@ -117,25 +145,15 @@ function unmatching(){
     setTimeout(hideCard,500);
 }
 //////////////////////////////////
-
-
-/*timer */
-
-function startTimer(){
-    interval = setInterval(function(){
-        timer.innerHTML = mins+":"+secs;
-        secs++;
-        if(secs == 60){
-            mins++;
-            secs=0;
-        }
-        if(mins == 60){
-            hrs++;
-            mins = 0;
-        }
-    },1000);
+/******** when all cards match*********/
+function congratulations(){
+if(matched_cards=16){
+  clearInterval(interval);
+  finalTime = timer.innerHTML;
 }
-deck.addEventListener('click',startTimer);
+}
+
+
 
 
 

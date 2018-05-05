@@ -10,8 +10,10 @@
  *   - add each card's HTML to the page
  */
 
-// Shuffle function from http://stackoverflow.com/a/2450976
-/*function shuffle(array) {
+const deck = document.querySelector(".deck");
+let cards = document.querySelectorAll(".card");
+let cards_arr =[...cards];
+function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
@@ -23,10 +25,25 @@
     }
 
     return array;
-}*/
+}
 
-const cards = document.querySelectorAll(".card");
-const cards_arr =[...cards];
+function startGame(){
+
+    cards_arr = shuffle(cards_arr);
+    for (let i = 0; i < cards_arr.length; i++){
+        deck.innerHTML = "";
+        [].forEach.call(cards_arr, function(item) {
+            deck.appendChild(item);
+        });
+        cards[i].classList.remove("show", "open", "match", "disabled");
+    }}
+document.querySelector(".restart").addEventListener('click',startGame);
+document.body.onload = startGame();
+
+
+
+
+// event listeners for clicking on cards
 for(var i =0 ; i<cards.length ; i++)
 {
   cards_arr[i].addEventListener('click',flip);
@@ -35,7 +52,7 @@ for(var i =0 ; i<cards.length ; i++)
 
 //flip function
 function flip(evt){
-  evt.target.classList.add("show","open");
+  evt.target.classList.add("show","open","disabled");
 }
 //insertOpen function
 const listOpen = [];
@@ -43,7 +60,7 @@ function insertOpen(evt){
   listOpen.push(evt.target);
   const lengthOfList=listOpen.length;
   if(lengthOfList===2){
-    if(listOpen[0].title===listOpen[1].title){
+    if(listOpen[0].type===listOpen[1].type){
       matching();
       listOpen.length = 0;
     }
@@ -61,8 +78,8 @@ function matching()
 }
 
 function hideCard(){
-    listOpen[0].classList.remove("show","open","unmatched");
-    listOpen[1].classList.remove("show","open","unmatched");
+    listOpen[0].classList.remove("show","open","unmatched","disabled");
+    listOpen[1].classList.remove("show","open","unmatched","disabled");
     listOpen.length = 0;
 }
 

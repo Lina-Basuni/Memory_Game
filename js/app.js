@@ -8,16 +8,16 @@ let matched_cards= document.getElementsByClassName("match");
 const third_star=document.querySelector(".third_star");
 const scnd_star=document.querySelector(".scnd_star");
 const fst_star=document.querySelector(".fst_star");
-var timer = document.querySelector(".timer");
-var secs = 0, mins = 0, hrs = 0;
-var interval;
-var finalTime;
-var f_time= document.querySelector(".f_time");
-var playAgain_btn=document.querySelector("#playAgain");
+let timer = document.querySelector(".timer");
+let secs = 0, mins = 0, hrs = 0;
+let interval;
+let finalTime;
+let f_time= document.querySelector(".f_time");
+let playAgain_btn=document.querySelector("#playAgain");
 
 /* Suffle Function*/
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+    let currentIndex = array.length, temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
@@ -88,10 +88,10 @@ function moves_inc(){
 
 /*stars function*/
 function stars(){
-  if(moves>=15){
+  if(moves>=25){
     third_star.style.color="#565656";
   }
-  if(moves>=30){
+  if(moves>=35){
     scnd_star.style.color="#565656";
   }
   if(moves>=45){
@@ -99,7 +99,7 @@ function stars(){
   }
 }
 // event listeners for clicking on cards
-for(var i =0 ; i<cards.length ; i++)
+for(let i =0 ; i<cards.length ; i++)
 {
   cards_arr[i].addEventListener('click',flip);
   cards_arr[i].addEventListener('click',insertOpen);
@@ -141,6 +141,10 @@ function matching()
 function hideCard(){
     listOpen[0].classList.remove("show","open","unmatched","disabled");
     listOpen[1].classList.remove("show","open","unmatched","disabled");
+    for(let i =0 ; i<cards.length ; i++)
+    {
+      cards_arr[i].classList.remove("disabled");
+    }
     listOpen.length = 0;
 }
 /////////////////////////////////////
@@ -149,6 +153,11 @@ function hideCard(){
 function unmatching(){
     listOpen[0].classList.add("unmatched");
     listOpen[1].classList.add("unmatched");
+    for(let i =0 ; i<cards.length ; i++)
+    {
+      cards_arr[i].classList.add("disabled");
+    }
+
     setTimeout(hideCard,500);
 }
 //////////////////////////////////
@@ -166,11 +175,11 @@ function congratulations(){
 
 
 /******modal********/
-var modal = document.getElementById('Congrats');
+let modal = document.getElementById('Congrats');
 playAgain_btn.addEventListener('click',playAgain_btn_fn)
 
 // Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+let span = document.getElementsByClassName("close")[0];
 
 // displayModal function
 function displayModal() {
@@ -193,13 +202,13 @@ let f_third_star=document.querySelector(".f_third_star");
 let f_scnd_star=document.querySelector(".f_scnd_star");
 let f_fst_star=document.querySelector(".f_fst_star");
 function f_stars(){
-  if(moves>=10){
+  if(moves>=25){
     f_third_star.style.color="#565656";
   }
-  if(moves>=25){
+  if(moves>=35){
     f_scnd_star.style.color="#565656";
   }
-  if(moves>=35){
+  if(moves>=45){
     f_fst_star.style.color="#565656";
   }
 }

@@ -12,6 +12,9 @@ var timer = document.querySelector(".timer");
 var secs = 0, mins = 0, hrs = 0;
 var interval;
 var finalTime;
+var f_time= document.querySelector(".f_time");
+var playAgain_btn=document.querySelector("#playAgain");
+
 /* Suffle Function*/
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -48,7 +51,7 @@ deck.addEventListener('click',startTimer);
 /***reset timer***/////
 
 function reset_timer(){
-  var timer = document.querySelector(".timer");
+  secs = 0, mins = 0, hrs = 0;
   timer.innerHTML = "0:0";
   clearInterval(interval);
 }
@@ -64,6 +67,9 @@ function startGame(){
         cards[i].classList.remove("show", "open", "match", "disabled");
         moves=0;
         n_moves.innerHTML=0;
+        third_star.style.color="#ffd700";
+        scnd_star.style.color="#ffd700";
+        fst_star.style.color="#ffd700";
 
     }
   }
@@ -72,22 +78,23 @@ function startGame(){
 document.querySelector(".restart").addEventListener('click',startGame);
 document.querySelector(".restart").addEventListener('click',reset_timer);
 document.body.onload = startGame();
+
 /*moves increment function*/
 function moves_inc(){
   moves++;
   n_moves.innerHTML=moves;
   stars();
-
 }
+
 /*stars function*/
 function stars(){
-  if(moves>=10){
+  if(moves>=15){
     third_star.style.color="#565656";
   }
-  if(moves>=25){
+  if(moves>=30){
     scnd_star.style.color="#565656";
   }
-  if(moves>=35){
+  if(moves>=45){
     fst_star.style.color="#565656";
   }
 }
@@ -147,18 +154,65 @@ function unmatching(){
 //////////////////////////////////
 /******** when all cards match*********/
 function congratulations(){
-if(matched_cards=16){
-  clearInterval(interval);
+  if(matched_cards.length==16){
+    clearInterval(interval);
+    displayModal();
+    f_stars();
+    fin_time();
+  }
+
+}
+
+
+
+/******modal********/
+var modal = document.getElementById('Congrats');
+playAgain_btn.addEventListener('click',playAgain_btn_fn)
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// displayModal function
+function displayModal() {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+/****final stars****/
+let f_third_star=document.querySelector(".f_third_star");
+let f_scnd_star=document.querySelector(".f_scnd_star");
+let f_fst_star=document.querySelector(".f_fst_star");
+function f_stars(){
+  if(moves>=10){
+    f_third_star.style.color="#565656";
+  }
+  if(moves>=25){
+    f_scnd_star.style.color="#565656";
+  }
+  if(moves>=35){
+    f_fst_star.style.color="#565656";
+  }
+}
+function fin_time(){
   finalTime = timer.innerHTML;
+  f_time.innerHTML=finalTime;
 }
-}
-
-
-
-
-
-
-
+/****function for play again button****/
+ function playAgain_btn_fn(){
+   modal.style.display="none";
+   startGame();
+   reset_timer();
+ }
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)

@@ -102,7 +102,7 @@ h1 {
     display: flex;
     flex-wrap: wrap;
     text-align: left;
-    width: 600px;
+    width: 100%;
     margin-bottom: 10px;
 }
 
@@ -112,28 +112,35 @@ h1 {
     display: inline-block;
     margin: 0 5px 0 0;
     color: #ffd700;
-    width: 10%;
 }
 
 .score-panel .timer{
   text-align: center;
-  width: 60%;
+  width: 20%;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 .score-panel .stars li {
     list-style: none;
     display: inline-block;
+    color: #ffd700;
 }
 
 .score-panel .restart {
     float: right;
     cursor: pointer;
-    text-align: right;
-    width: 17%;
+    text-align:left;
+    width:40%;
 }
 
 .score-panel .moves_word {
       padding-left: 5px;
+}
+
+.moves_starsContainer{
+  width: 40%;
+  text-align: right;
 }
 
 /* The Modal*/
@@ -183,7 +190,7 @@ h1 {
     padding: 0;
     display: inline-block;
     margin: 0 5px 0 0;
-    color: #ffd700;
+    color:#ffd700;
     text-align: center;
     width: 100%;;
     font-size: 5em;
@@ -201,7 +208,7 @@ h1 {
 
 #playAgain{
     margin:0 auto;
-    background-color: #12cabb; 
+    background-color: #12cabb;
     border: none;
     color: white;
     padding: 15px 32px;
@@ -229,3 +236,4 @@ h1 {
     transform: translate3d(4px, 0, 0);
   }
 }
+/*******responsive*******/

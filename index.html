@@ -2,11 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Matching Game</title>
     <meta name="description" content="">
     <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
     <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
 
@@ -16,13 +18,15 @@
         </header>
 
         <section class="score-panel">
-        	<ul class="stars">
-        		<li class="fst_star"><i class="fa fa-star"></i></li>
-        		<li class="scnd_star"><i class="fa fa-star"></i></li>
-        		<li class="third_star"><i class="fa fa-star"></i></li>
-        	</ul>
-        	<span class="moves">0</span> <span class="moves_word">Moves</span>
-          <p class="timer"></p>
+          <div class="moves_starsContainer">
+           <ul class="stars">
+        		 <li class="fst_star"><i class="fa fa-star"></i></li>
+        		 <li class="scnd_star"><i class="fa fa-star"></i></li>
+        		 <li class="third_star"><i class="fa fa-star"></i></li>
+        	 </ul>
+        	 <span class="moves">0</span> <span class="moves_word">Moves</span>
+          </div>
+          <p class="timer">0:0</p>
             <div class="restart">
         		<i class="fa fa-repeat"></i>
         	</div>
@@ -87,7 +91,7 @@
         <p class="modal-text">Congratulations!!</p>
         <p class="final_stars">
           <ul class="f_stars">
-            <li class="f_fst_star"><i class="fa fa-star"></i></li>
+            <li class="f_fst_star" ><i class="fa fa-star"></i></li>
             <li class="f_scnd_star"><i class="fa fa-star"></i></li>
             <li class="f_third_star"><i class="fa fa-star"></i></li>
           </ul>

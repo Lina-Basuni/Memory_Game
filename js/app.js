@@ -1,10 +1,11 @@
 /*****Memory Game***/
 const deck = document.querySelector(".deck");
 let cards = document.querySelectorAll(".card");
-let cards_arr =[...cards];
+let cardsArr =[...cards];
+const listOpen = [];
 let moves=0;
-let n_moves=document.querySelector(".moves");
-let matched_cards= document.getElementsByClassName("match");
+let nMoves=document.querySelector(".moves");
+let matchedCards= document.getElementsByClassName("match");
 const third_star=document.querySelector(".third_star");
 const scnd_star=document.querySelector(".scnd_star");
 const fst_star=document.querySelector(".fst_star");
@@ -50,7 +51,7 @@ deck.addEventListener('click',startTimer);
 
 /***reset timer***/////
 
-function reset_timer(){
+function resetTimer(){
   secs = 0, mins = 0, hrs = 0;
   timer.innerHTML = "0:0";
   clearInterval(interval);
@@ -58,53 +59,52 @@ function reset_timer(){
 
 /* Function that starts on loading the Game*/
 function startGame(){
-    cards_arr = shuffle(cards_arr);
-    for (let i = 0; i < cards_arr.length; i++){
+    listOpen.length=0;
+    cardsArr = shuffle(cardsArr);
+    for (let i = 0; i < cardsArr.length; i++){
         deck.innerHTML = "";
-        [].forEach.call(cards_arr, function(item) {
+        [].forEach.call(cardsArr, function(item) {
             deck.appendChild(item);
         });
         cards[i].classList.remove("show", "open", "match", "disabled");
         moves=0;
-        n_moves.innerHTML=0;
-        third_star.style.color="#ffd700";
-        scnd_star.style.color="#ffd700";
-        fst_star.style.color="#ffd700";
+        nMoves.innerHTML=0;
+        third_star.style.display="inline-block";
+        scnd_star.style.display="inline-block";
+        fst_star.style.display="inline-block";
 
     }
   }
   /////////////////////////////////////////////////////
 
 document.querySelector(".restart").addEventListener('click',startGame);
-document.querySelector(".restart").addEventListener('click',reset_timer);
+document.querySelector(".restart").addEventListener('click',resetTimer);
 document.body.onload = startGame();
 
 /*moves increment function*/
-function moves_inc(){
+function movesInc(){
   moves++;
-  n_moves.innerHTML=moves;
+  nMoves.innerHTML=moves;
   stars();
 }
 
 /*stars function*/
 function stars(){
   if(moves>=25){
-    third_star.style.color="#565656";
+    third_star.style.display="none";
   }
   if(moves>=35){
-    scnd_star.style.color="#565656";
+    scnd_star.style.display="none";
   }
-  if(moves>=45){
-    fst_star.style.color="#565656";
-  }
+
 }
 // event listeners for clicking on cards
 for(let i =0 ; i<cards.length ; i++)
 {
-  cards_arr[i].addEventListener('click',flip);
-  cards_arr[i].addEventListener('click',insertOpen);
-  cards_arr[i].addEventListener('click',moves_inc);
-  cards_arr[i].addEventListener('click',congratulations);
+  cardsArr[i].addEventListener('click',flip);
+  cardsArr[i].addEventListener('click',insertOpen);
+  cardsArr[i].addEventListener('click',movesInc);
+  cardsArr[i].addEventListener('click',congratulations);
 }
 
 //flip function
@@ -113,7 +113,7 @@ function flip(evt){
 }
 
 //insertOpen function that inserts a clicked card to an array of length 2
-const listOpen = [];
+
 function insertOpen(evt){
   listOpen.push(evt.target);
   const lengthOfList=listOpen.length;
@@ -143,7 +143,7 @@ function hideCard(){
     listOpen[1].classList.remove("show","open","unmatched","disabled");
     for(let i =0 ; i<cards.length ; i++)
     {
-      cards_arr[i].classList.remove("disabled");
+      cardsArr[i].classList.remove("disabled");
     }
     listOpen.length = 0;
 }
@@ -155,7 +155,7 @@ function unmatching(){
     listOpen[1].classList.add("unmatched");
     for(let i =0 ; i<cards.length ; i++)
     {
-      cards_arr[i].classList.add("disabled");
+      cardsArr[i].classList.add("disabled");
     }
 
     setTimeout(hideCard,500);
@@ -163,7 +163,7 @@ function unmatching(){
 //////////////////////////////////
 /******** when all cards match*********/
 function congratulations(){
-  if(matched_cards.length==16){
+  if(matchedCards.length==16){
     clearInterval(interval);
     displayModal();
     f_stars();
@@ -203,13 +203,10 @@ let f_scnd_star=document.querySelector(".f_scnd_star");
 let f_fst_star=document.querySelector(".f_fst_star");
 function f_stars(){
   if(moves>=25){
-    f_third_star.style.color="#565656";
+    f_third_star.style.display="none";
   }
   if(moves>=35){
-    f_scnd_star.style.color="#565656";
-  }
-  if(moves>=45){
-    f_fst_star.style.color="#565656";
+    f_scnd_star.style.display="none";
   }
 }
 function fin_time(){
@@ -220,7 +217,7 @@ function fin_time(){
  function playAgain_btn_fn(){
    modal.style.display="none";
    startGame();
-   reset_timer();
+   resetTimer();
  }
 /*
  * set up the event listener for a card. If a card is clicked:

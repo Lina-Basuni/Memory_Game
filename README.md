@@ -2,6 +2,8 @@
 
 This is a memory game where you can test your memory in a simple way by matching the cards
 
+Try it Here >> https://lina-basuni.github.io/Memory_Game/
+
 ## How to Play
 
 . Click on 2 cards an memorize their locations.
